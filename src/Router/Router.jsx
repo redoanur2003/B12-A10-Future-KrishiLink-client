@@ -9,12 +9,17 @@ import MyPost from "../Page/MyPost/MyPost";
 import Crop from "../Page/Crops/Crop";
 import MyInterest from "../Page/MyInterest/MyInterest";
 import PrivateRoute from "../FIrebase/PrivateRouter/PrivateRouter";
+import LoadingSpinner from "../FIrebase/LoadingSpinner/LoadingSpinner";
 
 export const router = createBrowserRouter([{
     path: '/',
     Component: Root,
+    hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
     children: [
-        { index: true, path: '/', Component: Home },
+        {
+            index: true, path: '/', Component: Home,
+            loader: () => fetch('http://localhost:1212/crop/latest')
+        },
         { path: '/login', Component: Login },
         { path: '/register', Component: Register },
         { path: '/addCrop', element: <PrivateRoute><AddCrop></AddCrop></PrivateRoute> },
