@@ -11,7 +11,7 @@ const NavBar = () => {
         <nav className="p-4 flex bg-linear-to-br from-[#198852] to-[#28dc58] justify-between items-center">
             <div>
                 <NavLink to="/"><div className="flex items-center gap-x-2">
-                    <img className="w-10 h-10" src={image} alt="PageLogo" />
+                    <img className="w-10 h-10 rounded-full" src={image} alt="PageLogo" />
                     <h1 className="text-xl text-white font-bold">KL-FG&CP</h1>
                 </div>
                 </NavLink>
