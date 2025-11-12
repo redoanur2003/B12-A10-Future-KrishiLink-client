@@ -85,7 +85,7 @@ const Login = () => {
         <>
             <div className='bg-linear-to-r from-[#12c2e9] via-[#c471ed] to-[#f64f59]'>
                 <NavLink to='/'>
-                    <h1 className=' mx-2 btn btn-active text-2xl font-black text-info'>Back to Home</h1>
+                    <h1 className=' mx-2 btn btn-active text-2xl font-black text-indigo-200'>Back to Home</h1>
                 </NavLink>
                 <div className='font-black text-3xl text-center text-white'>Login Now</div>
                 <div className='flex justify-center items-center'>

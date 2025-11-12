@@ -1,11 +1,24 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import { Menu, X } from 'lucide-react';
 import image from '../../assets/images.jpeg'
+import { AuthContext } from '../../FIrebase/AuthContext/AuthContext';
 
 
 const NavBar = () => {
     const [state, setState] = useState(false);
+    const { user, logOut } = use(AuthContext);
+    // console.log(user);
+
+    const handleSignOut = () => {
+        logOut()
+            .then(result => {
+                console.log('Sign out successful,', result)
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
+    }
 
     return (
         <nav className="p-4 flex bg-linear-to-br from-[#198852] to-[#28dc58] justify-between items-center">
@@ -65,10 +78,11 @@ const NavBar = () => {
             </div>
 
             <div>
-                <div className='flex gap-3'>
-                    <Link to='/login'><button className='btn btn-primary'>Login</button></Link>
-                    <Link to='/register'><button className='btn btn-primary'>Register</button></Link>
-                </div>
+                {user ? <button onClick={handleSignOut} className='btn btn-primary'>Sign Out</button> :
+                    <div className='flex gap-3'>
+                        <Link to='/login'><button className='btn btn-primary'>Login</button></Link>
+                        <Link to='/register'><button className='btn btn-primary'>Register</button></Link>
+                    </div>}
             </div>
         </nav>
     );
