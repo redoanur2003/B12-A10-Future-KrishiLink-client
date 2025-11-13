@@ -11,6 +11,7 @@ import MyInterest from "../Page/MyInterest/MyInterest";
 import PrivateRoute from "../FIrebase/PrivateRouter/PrivateRouter";
 import LoadingSpinner from "../FIrebase/LoadingSpinner/LoadingSpinner";
 import SingleCrop from "../Page/Crops/SingleCrop";
+import UpdateProfile from "../Page/Profile/UpdateProfile";
 
 export const router = createBrowserRouter([{
     path: '/',
@@ -25,6 +26,7 @@ export const router = createBrowserRouter([{
         { path: '/register', Component: Register },
         { path: '/addCrop', element: <PrivateRoute><AddCrop></AddCrop></PrivateRoute> },
         { path: '/profile', element: <PrivateRoute><Profile></Profile></PrivateRoute> },
+        { path: '/update', element: <PrivateRoute><UpdateProfile></UpdateProfile></PrivateRoute> },
         { path: '/myPost', element: <PrivateRoute><MyPost></MyPost></PrivateRoute> },
         {
             path: '/crop', Component: Crop,
