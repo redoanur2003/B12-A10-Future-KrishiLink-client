@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import DotLoading from '../../FIrebase/LoadingSpinner/DotLoading';
 import { Search } from 'lucide-react';
 
@@ -42,7 +42,7 @@ const Crop = () => {
             ) : filteredCrop.length > 0 ? (
                 <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 p-3'>
                     {filteredCrop.map(crops =>
-                        <NavLink key={crops._id} to={`/crop/${crops._id}`}>
+                        <Link key={crops._id} to={`/crop/${crops._id}`}>
                             <div className='card'>
                                 <div className="p-1">
                                     <img
@@ -57,7 +57,7 @@ const Crop = () => {
                                     <button className='btn bg-green-600'>View details</button>
                                 </div>
                             </div>
-                        </NavLink>
+                        </Link>
                     )}
                 </div>) : (
                 <h3 className='text-center text-red-500 text-3xl font-semibold mt-12'>No Crop Found</h3>

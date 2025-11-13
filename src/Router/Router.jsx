@@ -31,8 +31,8 @@ export const router = createBrowserRouter([{
             loader: () => fetch("http://localhost:1212/crop")
         },
         {
-            path: '/crop/:id', Component: SingleCrop,
-            loader: (params) => fetch(`http://localhost:1212/crop/${params.id}`)
+            path: '/crop/:id', element: <PrivateRoute><SingleCrop></SingleCrop></PrivateRoute>,
+            loader: ({ params }) => fetch(`http://localhost:1212/crop/${params.id}`)
         },
         { path: '/myInterests', element: <PrivateRoute><MyInterest></MyInterest></PrivateRoute> },
     ],
