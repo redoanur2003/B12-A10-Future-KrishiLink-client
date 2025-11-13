@@ -106,10 +106,10 @@ const AddCrop = () => {
                                             className="select select-bordered bg-white w-full"
                                             required
                                         >
-                                            <option value="">Select type</option>
-                                            <option value="Vegetable">Vegetable</option>
-                                            <option value="Fruit">Fruit</option>
-                                            <option value="Grain">Grain</option>
+                                            <option>Select type</option>
+                                            <option >Vegetable</option>
+                                            <option >Fruit</option>
+                                            <option>Grain</option>
                                         </select>
                                     </div>
 
@@ -133,10 +133,11 @@ const AddCrop = () => {
                                             className="select select-bordered bg-white w-full"
                                             required
                                         >
-                                            <option value="">Select unit</option>
-                                            <option value="kg">kg</option>
-                                            <option value="ton">ton</option>
-                                            <option value="bag">bag</option>
+                                            <option >Select unit</option>
+                                            <option >kg</option>
+                                            <option >ton</option>
+                                            <option >bag</option>
+                                            <option >piece</option>
                                         </select>
                                     </div>
 
