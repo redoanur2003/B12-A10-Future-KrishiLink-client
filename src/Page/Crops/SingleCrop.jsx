@@ -119,9 +119,11 @@ const SingleCrop = () => {
                 {
                     (email != singleCrop.owner.ownerEmail) ?
                         <div className=''>
-                            <button
-                                onClick={handleInterestModalOpen}
-                                className="btn btn-primary">Interested this crop</button>
+                            <div className='flex justify-center p-2'>
+                                <button
+                                    onClick={handleInterestModalOpen}
+                                    className="btn btn-primary">Interested this crop</button>
+                            </div>
 
                             <dialog ref={interestModalRef} className="modal modal-bottom sm:modal-middle">
                                 <div className="modal-box bg-emerald-300">
@@ -138,7 +140,7 @@ const SingleCrop = () => {
 
                                             <label className="label">Total Price </label>
                                             <input type="text" name='total' className="input bg-white"
-                                                readOnly defaultValue={price}
+                                                readOnly value={price ? price : singleCrop.pricePerUnit}
                                             />
                                             <button className="btn btn-neutral mt-4">Please your bid</button>
                                         </fieldset>
