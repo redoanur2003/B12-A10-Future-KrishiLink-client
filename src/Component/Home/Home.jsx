@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const Home = () => {
     const latest = useLoaderData();
-    console.log(latest);
+    // console.log(latest);
     const [crop, setCrop] = useState([]);
     const [news, setNews] = useState([]);
 
@@ -76,20 +76,22 @@ const Home = () => {
 
             <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 p-3'>
                 {latest.map(crops =>
-                    <div key={crops._id} className='card'>
-                        <div className="p-1">
-                            <img
-                                className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover rounded-xl"
-                                src={crops.image}
-                                alt={crops.name}
-                            />
-                        </div>
-                        <div className="flex justify-between p-1 text-sm sm:text-base">
-                            <p className="font-medium">{crops.name}</p>
-                            <p className="text-gray-600">{crops.type}</p>
-                        </div>
+                    <NavLink key={crops._id} to={`/crop/${crops._id}`}>
+                        <div className='card'>
+                            <div className="p-1">
+                                <img
+                                    className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover rounded-xl"
+                                    src={crops.image}
+                                    alt={crops.name}
+                                />
+                            </div>
+                            <div className="flex justify-between p-1 text-sm sm:text-base">
+                                <p className="font-medium">{crops.name}</p>
+                                <p className="text-gray-600">{crops.type}</p>
+                            </div>
 
-                    </div>
+                        </div>
+                    </NavLink>
                 )}
             </div>
             <div className='flex justify-center'>

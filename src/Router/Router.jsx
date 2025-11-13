@@ -10,6 +10,7 @@ import Crop from "../Page/Crops/Crop";
 import MyInterest from "../Page/MyInterest/MyInterest";
 import PrivateRoute from "../FIrebase/PrivateRouter/PrivateRouter";
 import LoadingSpinner from "../FIrebase/LoadingSpinner/LoadingSpinner";
+import SingleCrop from "../Page/Crops/SingleCrop";
 
 export const router = createBrowserRouter([{
     path: '/',
@@ -18,14 +19,21 @@ export const router = createBrowserRouter([{
     children: [
         {
             index: true, path: '/', Component: Home,
-            loader: () => fetch('http://localhost:1212/crop/latest')
+            loader: () => fetch('http://localhost:1212/latest')
         },
         { path: '/login', Component: Login },
         { path: '/register', Component: Register },
         { path: '/addCrop', element: <PrivateRoute><AddCrop></AddCrop></PrivateRoute> },
         { path: '/profile', element: <PrivateRoute><Profile></Profile></PrivateRoute> },
         { path: '/myPost', element: <PrivateRoute><MyPost></MyPost></PrivateRoute> },
-        { path: '/crop', Component: Crop },
+        {
+            path: '/crop', Component: Crop,
+            loader: () => fetch("http://localhost:1212/crop")
+        },
+        {
+            path: '/crop/:id', Component: SingleCrop,
+            loader: (params) => fetch(`http://localhost:1212/crop/${params.id}`)
+        },
         { path: '/myInterests', element: <PrivateRoute><MyInterest></MyInterest></PrivateRoute> },
     ],
 },])
