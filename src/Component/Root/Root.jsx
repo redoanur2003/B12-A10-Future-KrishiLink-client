@@ -1,12 +1,16 @@
 import React from 'react';
 import { Outlet } from 'react-router';
 import NavBar from '../NavBar/NavBar';
+import Footer from '../Footer/Footer';
 
 const Root = () => {
     return (
-        <div>
+        <div className='min-h-screen flex flex-col'>
             <NavBar></NavBar>
-            <Outlet></Outlet>
+            <div className='grow'>
+                <Outlet></Outlet>
+            </div>
+            <Footer></Footer>
         </div>
     );
 };
