@@ -53,8 +53,8 @@ const Login = () => {
     }
     const handleReset = () => {
         const email = emailRef.current.value;
-        console.log(email);
-
+        // console.log(email);
+        navigate('/forget', { state: { email } })
     }
     const handleGoogleSubmit = (e) => {
         e.preventDefault();

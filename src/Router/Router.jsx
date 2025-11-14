@@ -14,6 +14,7 @@ import SingleCrop from "../Page/Crops/SingleCrop";
 import UpdateProfile from "../Page/Profile/UpdateProfile";
 import ErrorPage from "../Page/Error/ErrorPage";
 import ErrorCrop from "../Page/Error/ErrorCrop";
+import ForgetPassword from "../Component/Login/ForgetPassword";
 
 export const router = createBrowserRouter([{
     path: '/',
@@ -41,5 +42,6 @@ export const router = createBrowserRouter([{
             errorElement: <ErrorCrop></ErrorCrop>
         },
         { path: '/myInterests', element: <PrivateRoute><MyInterest></MyInterest></PrivateRoute> },
+        { path: '/forget', element: <ForgetPassword></ForgetPassword> },
     ],
 },])
