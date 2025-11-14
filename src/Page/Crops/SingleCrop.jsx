@@ -93,7 +93,7 @@ const SingleCrop = () => {
                             Crop Name: <span className="text-blue-600">{singleCrop.name}</span>
                         </h2>
 
-                        <div className="flex flex-wrap gap-4 text-lg mb-6">
+                        <div className="flex flex-wrap gap-4 text-xl mb-6">
                             <p>
                                 <span className="font-semibold text-success">Owned by:</span> {singleCrop.owner.ownerName}
                             </p>
@@ -102,14 +102,16 @@ const SingleCrop = () => {
                             </p>
                         </div>
 
-                        <div className='flex gap-x-2'>
+                        <div className='flex gap-x-3 mb-3'>
+                            <p className='text-2xl font-semibold mb-2'>Owner email: {singleCrop.owner.ownerEmail}</p>
+                            <p className='text-2xl font-semibold mb-2'>Location: {singleCrop.location}</p>
+                        </div>
+
+                        <div className='flex gap-3'>
                             <h3 className="text-2xl font-semibold mb-2 text-success">Description: </h3>
                             <p className="leading-relaxed text-xl">
                                 {singleCrop.description}
                             </p>
-                        </div>
-                        <div>
-                            <p className='text-2xl font-semibold mb-2'>Location: {singleCrop.location}</p>
                         </div>
                     </div>
                 </div>

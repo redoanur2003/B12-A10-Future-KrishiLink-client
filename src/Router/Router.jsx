@@ -12,11 +12,14 @@ import PrivateRoute from "../FIrebase/PrivateRouter/PrivateRouter";
 import LoadingSpinner from "../FIrebase/LoadingSpinner/LoadingSpinner";
 import SingleCrop from "../Page/Crops/SingleCrop";
 import UpdateProfile from "../Page/Profile/UpdateProfile";
+import ErrorPage from "../Page/Error/ErrorPage";
+import ErrorCrop from "../Page/Error/ErrorCrop";
 
 export const router = createBrowserRouter([{
     path: '/',
     Component: Root,
     hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
         {
             index: true, path: '/', Component: Home,
@@ -34,7 +37,8 @@ export const router = createBrowserRouter([{
         },
         {
             path: '/crop/:id', element: <PrivateRoute><SingleCrop></SingleCrop></PrivateRoute>,
-            loader: ({ params }) => fetch(`http://localhost:1212/crop/${params.id}`)
+            loader: ({ params }) => fetch(`http://localhost:1212/crop/${params.id}`),
+            errorElement: <ErrorCrop></ErrorCrop>
         },
         { path: '/myInterests', element: <PrivateRoute><MyInterest></MyInterest></PrivateRoute> },
     ],
