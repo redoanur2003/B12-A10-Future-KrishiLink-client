@@ -1,16 +1,32 @@
-import React, { use, useRef, useState } from 'react';
+import React, { use, useEffect, useRef, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import { AuthContext } from '../../FIrebase/AuthContext/AuthContext';
+import Swal from 'sweetalert2';
 
 const SingleCrop = () => {
     const singleCrop = useLoaderData();
-    const { _id: productId } = singleCrop;
+    const { _id: cropId, interests } = singleCrop;
+    // console.log(interests);
     // console.log(singleCrop);
+
     const { user } = use(AuthContext);
     const interestModalRef = useRef(null);
     const email = user.email;
-    // console.log(email);
+    const name = user.displayName;
+    const [canInterest, SetCanInterest] = useState();
+    // console.log(user);
     const [price, setPrice] = useState();
+
+    useEffect(() => {
+        if (interests && Array.isArray(interests)) {
+            const existing = interests.find(
+                inter => inter.interestData.userEmail === email
+            );
+            SetCanInterest(existing || null);
+        } else {
+            SetCanInterest(null);
+        }
+    }, [interests, email]);
 
     const handleInterestModalOpen = () => {
         interestModalRef.current.showModal();
@@ -21,45 +37,69 @@ const SingleCrop = () => {
         const message = e.target.message.value;
         const quantity = e.target.quantity.value;
         const total = e.target.total.value;
+        console.log(cropId, quantity, message, total)
 
-        console.log(productId, quantity, message, total)
-        // interestModalRef.current.close();
+        const interestInfo = {
+            cropId: cropId,
+            userEmail: email,
+            userName: name,
+            quantity: quantity,
+            message: message,
+            status: "pending"
+        }
 
-        // const newBid = {
-        //     product: productId,
-        //     buyer_name: name,
-        //     buyer_email: email,
-        //     buyer_image: user?.photoURL,
-        //     bid_price: bid,
-        //     status: 'pending'
-        // }
 
-        // fetch('http://localhost:3000/bids', {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(newBid)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         if (data.insertedId) {
-        //             bidModalRef.current.close();
-        //             Swal.fire({
-        //                 position: "top-end",
-        //                 icon: "success",
-        //                 title: "Your bid has been placed.",
-        //                 showConfirmButton: false,
-        //                 timer: 1500
-        //             });
-        //             // add the new bid to the state
-        //             newBid._id = data.insertedId;
-        //             const newBids = [...bids, newBid];
-        //             newBids.sort((a, b) => b.bid_price - a.bid_price);
-        //             setBids(newBids);
-        //         }
-        //     })
+        if (quantity > 0) {
+            interestModalRef.current.close();
+            Swal.fire({
+                position: "top-end",
+                icon: "warning",
+                title: "Are you sure to send interest.",
+                showConfirmButton: true,
+                showCancelButton: true
+            })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        fetch(`http://localhost:1212/crop/interest/${cropId}`, {
+                            method: 'PATCH',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(interestInfo)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.modifiedCount) {
+                                    Swal.fire({
+                                        position: "top-end",
+                                        icon: "success",
+                                        title: "Send interest successfully",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    e.target.reset();
+                                    SetCanInterest(interestInfo);
+                                }
 
+                                else {
+                                    console.log('Not modify')
+                                }
+                            })
+                    }
+                    else {
+                        console.log('not ok')
+                    }
+                })
+        }
+        else {
+            interestModalRef.current.close();
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Quantity must be 1 or more",
+                showConfirmButton: true
+            })
+        }
     }
     return (
         <>
@@ -120,11 +160,15 @@ const SingleCrop = () => {
             <div>
                 {
                     (email != singleCrop.owner.ownerEmail) ?
+
                         <div className=''>
                             <div className='flex justify-center p-2'>
-                                <button
+                                {(!canInterest) ? <button
                                     onClick={handleInterestModalOpen}
-                                    className="btn btn-primary">Interested this crop</button>
+                                    className="btn btn-primary">Interested this crop</button> :
+                                    <h1 className='text-orange-500 text-xs md:text-2xl font-bold'>You already send interest this crop</h1>
+                                }
+
                             </div>
 
                             <dialog ref={interestModalRef} className="modal modal-bottom sm:modal-middle">
