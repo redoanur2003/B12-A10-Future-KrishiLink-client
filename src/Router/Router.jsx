@@ -41,7 +41,10 @@ export const router = createBrowserRouter([{
             loader: ({ params }) => fetch(`http://localhost:1212/crop/${params.id}`),
             errorElement: <ErrorCrop></ErrorCrop>
         },
-        { path: '/myInterests', element: <PrivateRoute><MyInterest></MyInterest></PrivateRoute> },
+        {
+            path: '/myInterests', element: <PrivateRoute><MyInterest></MyInterest></PrivateRoute>,
+            loader: () => fetch("http://localhost:1212/crop")
+        },
         { path: '/forget', element: <ForgetPassword></ForgetPassword> },
     ],
 },])
