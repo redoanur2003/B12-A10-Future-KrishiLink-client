@@ -200,9 +200,45 @@ const SingleCrop = () => {
                                 </div>
                             </dialog>
                         </div>
-                        : <div>
-                            <h1>User match</h1>
+                        : <div className="p-4">
+                            <div className="overflow-x-auto">
+                                {interests && interests.length > 0 ? (
+                                    <table className="min-w-full table border border-gray-300">
+                                        <thead>
+                                            <tr className="text-black">
+                                                <th className="border p-2">Buyer Name</th>
+                                                <th className="border p-2">Quantity</th>
+                                                <th className="border p-2">Message</th>
+                                                <th className="border p-2">Status</th>
+                                                <th className="border p-2">Accept</th>
+                                                <th className="border p-2">Reject</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {interests.map((inter) => (
+                                                <tr key={inter._id} className="hover:bg-gray-50">
+                                                    <td className="border p-2">{inter.interestData.userName}</td>
+                                                    <td className="border p-2">{inter.interestData.quantity}</td>
+                                                    <td className="border p-2">{inter.interestData.message}</td>
+                                                    <td className="border p-2">{inter.interestData.status}</td>
+                                                    <td className="border p-2">
+                                                        <button className="btn btn-primary w-full">Accept</button>
+                                                    </td>
+                                                    <td className="border p-2">
+                                                        <button className="btn btn-primary w-full">Reject</button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                ) : (
+                                    <p className="text-center text-xl text-gray-500">
+                                        No interests yet for this crop.
+                                    </p>
+                                )}
+                            </div>
                         </div>
+
                 }
             </div>
         </>
