@@ -142,7 +142,7 @@ const SingleCrop = () => {
                                             <input type="text" name='total' className="input bg-white"
                                                 readOnly value={price ? price : singleCrop.pricePerUnit}
                                             />
-                                            <button className="btn btn-neutral mt-4">Please your bid</button>
+                                            <button className="btn btn-neutral mt-4">Please your interest</button>
                                         </fieldset>
                                     </form>
 
