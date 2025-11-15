@@ -64,7 +64,7 @@ const SingleCrop = () => {
             })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        fetch(`http://localhost:1212/crop/interest/${cropId}`, {
+                        fetch(`https://krishi-api-server.vercel.app/crop/interest/${cropId}`, {
                             method: 'PATCH',
                             headers: {
                                 'content-type': 'application/json'
@@ -123,7 +123,7 @@ const SingleCrop = () => {
             .then((result) => {
                 if (result.isConfirmed) {
 
-                    fetch('http://localhost:1212/updateInterest', {
+                    fetch('https://krishi-api-server.vercel.app/updateInterest', {
                         method: 'PATCH',
                         headers: {
                             'content-type': 'application/json'

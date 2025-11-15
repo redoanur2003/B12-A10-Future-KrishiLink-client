@@ -53,7 +53,7 @@ const AddCrop = () => {
         };
 
 
-        fetch('http://localhost:1212/crop', {
+        fetch('https://krishi-api-server.vercel.app/crop', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

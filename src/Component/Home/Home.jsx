@@ -16,11 +16,11 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        fetch('http://localhost:1212/crop')
+        fetch('https://krishi-api-server.vercel.app/crop')
             .then(res => res.json())
             .then(data => setCrop(data));
 
-        fetch('http://localhost:1212/news')
+        fetch('https://krishi-api-server.vercel.app/news')
             .then(res => res.json())
             .then(data => setNews(data))
     }, [])

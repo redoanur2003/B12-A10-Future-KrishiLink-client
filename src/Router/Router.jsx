@@ -24,7 +24,7 @@ export const router = createBrowserRouter([{
     children: [
         {
             index: true, path: '/', Component: Home,
-            loader: () => fetch('http://localhost:1212/latest')
+            loader: () => fetch('https://krishi-api-server.vercel.app/latest')
         },
         { path: '/login', Component: Login },
         { path: '/register', Component: Register },
@@ -34,16 +34,16 @@ export const router = createBrowserRouter([{
         { path: '/myPost', element: <PrivateRoute><MyPost></MyPost></PrivateRoute> },
         {
             path: '/crop', Component: Crop,
-            loader: () => fetch("http://localhost:1212/crop")
+            loader: () => fetch("https://krishi-api-server.vercel.app/crop")
         },
         {
             path: '/crop/:id', element: <PrivateRoute><SingleCrop></SingleCrop></PrivateRoute>,
-            loader: ({ params }) => fetch(`http://localhost:1212/crop/${params.id}`),
+            loader: ({ params }) => fetch(`https://krishi-api-server.vercel.app/crop/${params.id}`),
             errorElement: <ErrorCrop></ErrorCrop>
         },
         {
             path: '/myInterests', element: <PrivateRoute><MyInterest></MyInterest></PrivateRoute>,
-            loader: () => fetch("http://localhost:1212/crop")
+            loader: () => fetch("https://krishi-api-server.vercel.app/crop")
         },
         { path: '/forget', element: <ForgetPassword></ForgetPassword> },
     ],

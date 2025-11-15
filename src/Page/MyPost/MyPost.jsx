@@ -14,7 +14,7 @@ const MyPost = () => {
     }, []);
 
     useEffect(() => {
-        fetch(`http://localhost:1212/myPost?email=${email}`)
+        fetch(`https://krishi-api-server.vercel.app/myPost?email=${email}`)
             .then(res => res.json())
             .then(data => setMyCrop(data));
     }, [email]);
@@ -30,7 +30,7 @@ const MyPost = () => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    fetch(`http://localhost:1212/crop/${id}`, {
+                    fetch(`https://krishi-api-server.vercel.app/crop/${id}`, {
                         method: 'delete'
                     })
                         .then(res => res.json())
@@ -87,7 +87,7 @@ const MyPost = () => {
             images: e.target.image.value
         }
 
-        fetch(`http://localhost:1212/crop/${editId}`, {
+        fetch(`https://krishi-api-server.vercel.app/crop/${editId}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -106,7 +106,7 @@ const MyPost = () => {
                         timer: 1500
                     });
 
-                    fetch(`http://localhost:1212/crop/${editId}`)
+                    fetch(`https://krishi-api-server.vercel.app/crop/${editId}`)
                         .then(res => res.json())
                         .then(data => {
                             setMyCrop(prev =>
