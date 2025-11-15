@@ -19,6 +19,7 @@ const MyInterest = () => {
     // console.log(userInterestCrops);
     return (
         <>
+            <h1 className='text-2xl text-center underline'>My Interested crop</h1>
             <div className="p-4">
                 {userInterestCrops.length > 0 ? (
                     <div className="overflow-x-auto">

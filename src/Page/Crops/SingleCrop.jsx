@@ -5,9 +5,10 @@ import Swal from 'sweetalert2';
 
 const SingleCrop = () => {
     const singleCrop = useLoaderData();
-    const { _id: cropId, interests } = singleCrop;
+    const { _id: cropId, interests, quantity } = singleCrop;
+    const [totalQuantity, setTotalQuantity] = useState(quantity);
     // console.log(interests);
-    // console.log(singleCrop);
+    // console.log(totalQuantity);
 
     const { user } = use(AuthContext);
     const interestModalRef = useRef(null);
@@ -16,6 +17,7 @@ const SingleCrop = () => {
     const [canInterest, SetCanInterest] = useState();
     // console.log(user);
     const [price, setPrice] = useState();
+    const [cropInterests, setCropInterests] = useState(singleCrop.interests);
 
     useEffect(() => {
         if (interests && Array.isArray(interests)) {
@@ -36,8 +38,7 @@ const SingleCrop = () => {
         e.preventDefault();
         const message = e.target.message.value;
         const quantity = e.target.quantity.value;
-        const total = e.target.total.value;
-        console.log(cropId, quantity, message, total)
+        // console.log(cropId, quantity, message, total)
 
         const interestInfo = {
             cropId: cropId,
@@ -101,6 +102,62 @@ const SingleCrop = () => {
             })
         }
     }
+
+    const handleStatus = (stat, interestId, qun) => {
+        // console.log("The information is: ", stat, interestId, singleCrop._id);
+
+        const updateData = {
+            interestId: interestId, cropsId: singleCrop._id, status: stat
+        }
+
+        Swal.fire({
+            position: "top-end",
+            icon: "warning",
+            title: `Are you sure ${stat} interest?`,
+            showConfirmButton: true,
+            showCancelButton: true
+        })
+            .then((result) => {
+                if (result.isConfirmed) {
+
+                    fetch('http://localhost:1212/updateInterest', {
+                        method: 'PATCH',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(updateData)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.modifiedCount) {
+                                setCropInterests(prev =>
+                                    prev.map(inter =>
+                                        inter._id === interestId
+                                            ? {
+                                                ...inter,
+                                                interestData: {
+                                                    ...inter.interestData,
+                                                    status: stat
+                                                }
+                                            }
+                                            : inter
+                                    )
+                                );
+                                Swal.fire({
+                                    position: "top-end",
+                                    icon: "success",
+                                    title: `Interest ${stat}`,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                if (stat === "accept") {
+                                    setTotalQuantity(totalQuantity - qun);
+                                }
+                            }
+                        })
+                }
+            })
+    }
     return (
         <>
             <div>
@@ -118,11 +175,11 @@ const SingleCrop = () => {
                             <div className="flex items-center gap-2 p-2">
                                 <p className="text-success text-lg font-semibold">Price Per Unit:</p>
                                 <span className="text-lg font-semibold flex items-center gap-1">
-                                    {singleCrop.pricePerUnit} {singleCrop.unit}
+                                    {singleCrop.pricePerUnit} tk. Unit: {singleCrop.unit}
                                 </span>
                                 <p className="text-success text-lg font-semibold">Total quantity:</p>
                                 <span className="text-lg font-semibold flex items-center gap-1">
-                                    {singleCrop.quantity}
+                                    {totalQuantity}
                                 </span>
                             </div>
                         </div>
@@ -173,13 +230,16 @@ const SingleCrop = () => {
 
                             <dialog ref={interestModalRef} className="modal modal-bottom sm:modal-middle">
                                 <div className="modal-box bg-emerald-300">
-                                    <h3 className="font-bold text-lg">Give the best offer!</h3>
-                                    <p className="py-4">Offer something seller can not resist</p>
+                                    <h3 className="font-bold text-lg">Give the best interest offer!</h3>
+                                    <p className="py-4">This interested offer seller can not resist</p>
                                     <form onSubmit={handleInterestSubmit}>
                                         <fieldset className="fieldset">
                                             <label className="label">Enter quantity</label>
-                                            <input type="text" onChange={(e) => setPrice(e.target.value * singleCrop.pricePerUnit)} name='quantity' placeholder='Enter the number quantity'
-                                                defaultValue={1} className="input bg-white" />
+                                            <div className='flex gap-2'>
+                                                <input type="text" onChange={(e) => setPrice(e.target.value * singleCrop.pricePerUnit)} name='quantity' placeholder='Enter the number quantity'
+                                                    defaultValue={1} className="input bg-white" />
+                                                <input type="text" defaultValue={singleCrop.unit} readOnly className='bg-white text-xl w-20 text-center rounded' />
+                                            </div>
 
                                             <label className="label">Message</label>
                                             <input type="text" className="input bg-white" name='message' placeholder='Write about quality type and quantity' />
@@ -215,17 +275,27 @@ const SingleCrop = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {interests.map((inter) => (
+                                            {cropInterests.map((inter) => (
                                                 <tr key={inter._id} className="hover:bg-gray-50">
                                                     <td className="border p-2">{inter.interestData.userName}</td>
                                                     <td className="border p-2">{inter.interestData.quantity}</td>
                                                     <td className="border p-2">{inter.interestData.message}</td>
-                                                    <td className="border p-2">{inter.interestData.status}</td>
+                                                    <td className={`border border-black p-2 text-center ${(inter.interestData.status === "pending") && "text-yellow-400 text-xl"
+                                                        || (inter.interestData.status === "reject") && "text-red-400 text-xl" ||
+                                                        "text-green-400 text-xl"}`
+                                                    }>
+                                                        {inter.interestData.status}</td>
                                                     <td className="border p-2">
-                                                        <button className="btn btn-primary w-full">Accept</button>
+                                                        {(inter.interestData.status === "pending") && <button onClick={() => handleStatus("accept", inter._id, inter.interestData.quantity)}
+                                                            className="btn btn-primary w-full">Accept</button> || (inter.interestData.status === "accept") && <h1 className='text-green-400 text-xl'>Accepted</h1> ||
+                                                            (inter.interestData.status === "reject") && <h1 className='text-red-400 text-xl'>Rejected</h1>
+                                                        }
                                                     </td>
                                                     <td className="border p-2">
-                                                        <button className="btn btn-primary w-full">Reject</button>
+                                                        {(inter.interestData.status === "pending") && <button onClick={() => handleStatus("reject", inter._id, inter.interestData.quantity)}
+                                                            className="btn btn-primary w-full">Reject</button> || (inter.interestData.status === "accept") && <h1 className='text-green-400 text-xl'>Accepted</h1> ||
+                                                            (inter.interestData.status === "reject") && <h1 className='text-red-400 text-xl'>Rejected</h1>
+                                                        }
                                                     </td>
                                                 </tr>
                                             ))}
@@ -238,7 +308,6 @@ const SingleCrop = () => {
                                 )}
                             </div>
                         </div>
-
                 }
             </div>
         </>
