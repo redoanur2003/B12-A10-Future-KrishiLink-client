@@ -47,7 +47,7 @@ const Crop = () => {
                 <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 p-3'>
                     {filteredCrop.map(crops =>
                         <Link key={crops._id} to={`/crop/${crops._id}`}>
-                            <div className='card'>
+                            <div className='card grid'>
                                 <div className="p-1">
                                     <img
                                         className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover rounded-xl"
@@ -58,8 +58,8 @@ const Crop = () => {
                                 <div className="flex justify-between p-1 text-sm sm:text-base">
                                     <p className="font-medium">{crops.name}</p>
                                     <p className="text-gray-600">{crops.type}</p>
-                                    <button className='btn bg-green-600'>View details</button>
                                 </div>
+                                <button className='btn bg-green-600'>View details</button>
                             </div>
                         </Link>
                     )}

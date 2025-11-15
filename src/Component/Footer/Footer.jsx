@@ -7,14 +7,16 @@ const Footer = () => {
     return (
         <div>
             <footer className="footer sm:footer-horizontal bg-white text-black border-2 border-b-blue-500 items-center p-4">
-                <aside className="grid-flow-col items-center">
+                <aside className="">
                     <NavLink to="/"><div className="flex items-center gap-x-2">
                         <img className="w-10 h-10 rounded-full" src={image} alt="PageLogo" />
                         <h1 className="text-xl font-bold">KL-FG&CP</h1>
                     </div>
                     </NavLink>
-                    <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
                 </aside>
+                <p className="text-center text-xl">
+                    © 2025 KrishiLink — Connecting Farmers & Buyers.
+                </p>
                 <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
                     <a>
                         {/* <Instagram size={40}></Instagram> */}

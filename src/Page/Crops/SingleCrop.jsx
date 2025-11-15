@@ -163,28 +163,31 @@ const SingleCrop = () => {
     }
     return (
         <>
-            <div>
+            <div className='p-2'>
                 <div className="flex flex-col md:flex-row items-center md:items-start gap-10 border-b-2 border-gray-200 pb-10">
                     <div className="flex flex-col items-center">
                         <div className="bg-white shadow-md rounded-2xl p-3">
                             <img
-                                className="w-48 sm:w-64 md:w-72 object-cover rounded-xl"
+                                className="w-auto sm:w-64 md:w-72 object-cover rounded-xl"
                                 src={singleCrop.image}
                                 alt={singleCrop.name}
                             />
                         </div>
 
                         <div className="flex items-center justify-center gap-6 mt-4">
-                            <div className="flex items-center gap-2 p-2">
-                                <p className="text-success text-lg font-semibold">Price Per Unit:</p>
-                                <span className="text-lg font-semibold flex items-center gap-1">
-                                    {singleCrop.pricePerUnit} tk. Unit: {singleCrop.unit}
-                                </span>
-                                <p className="text-success text-lg font-semibold">Total quantity:</p>
-                                <span className="text-lg font-semibold flex items-center gap-1">
+                            <div className="grid md:flex items-center gap-2 p-2">
+                                <p className="flex text-success text-lg font-semibold">Price Per Unit
+                                    <span className="text-lg font-semibold items-center gap-1">
+                                        <p>: {singleCrop.pricePerUnit} tk. </p>
+                                    </span>
+                                </p>
+                                <p> Unit: {singleCrop.unit}</p>
+                            </div>
+                            <p className="flex text-success text-lg font-semibold">Total quantity:
+                                <span className="text-lg font-semibold flex items-center">
                                     {totalQuantity}
                                 </span>
-                            </div>
+                            </p>
                         </div>
                     </div>
 
@@ -264,6 +267,7 @@ const SingleCrop = () => {
                             </dialog>
                         </div>
                         : <div className="p-4">
+                            <h1 className='text-center p-2 text-xs md:text-2xl'>Manage your client to their requested crop</h1>
                             <div className="overflow-x-auto">
                                 {interests && interests.length > 0 ? (
                                     <table className="min-w-full table border border-gray-300">

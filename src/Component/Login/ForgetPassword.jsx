@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router';
-import { AuthContext } from '../../FIrebase/AuthContext/AuthContext';
+import { auth } from '../../FIrebase/firebase.init';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import Swal from 'sweetalert2';
 
@@ -24,7 +24,7 @@ const ForgetPassword = () => {
             return;
         }
 
-        sendPasswordResetEmail(AuthContext, email)
+        sendPasswordResetEmail(auth, email)
             .then(() => {
                 Swal.fire({
                     icon: 'success',
@@ -63,7 +63,6 @@ const ForgetPassword = () => {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
-
                                 <button className="btn btn-primary mt-4 w-full">Send Reset</button>
                             </fieldset>
                         </form>

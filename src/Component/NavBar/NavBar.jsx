@@ -34,7 +34,7 @@ const NavBar = () => {
 
                     {user ?
                         <ul
-                            className={`absolute bg-white rounded-lg p-2 shadow-lg duration-1000 ${state ? 'grid grid-cols-3 w-[200px] h-24 text-xs' : 'hidden'}`}>
+                            className={`absolute bg-white rounded-lg px-2 shadow-lg duration-1000 ${state ? 'grid grid-cols-3 w-[200px] h-10 text-xs' : 'hidden'}`}>
                             <li className="hover:text-cyan-300 hover:underline">
                                 <NavLink to="/">Home</NavLink></li>
 
@@ -56,7 +56,7 @@ const NavBar = () => {
                         </ul>
                         :
                         <ul
-                            className={`absolute bg-white rounded-lg p-2 shadow-lg duration-1000 ${state ? 'grid grid-cols-3 w-[200px] h-24 text-xs' : 'hidden'}`}>
+                            className={`absolute bg-white rounded-lg p-2 shadow-lg duration-1000 ${state ? 'grid grid-cols-3 w-[200px] h-10 text-xs' : 'hidden'}`}>
                             <li className="hover:text-cyan-300 hover:underline">
                                 <NavLink to="/">Home</NavLink></li>
 

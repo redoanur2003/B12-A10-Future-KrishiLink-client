@@ -55,7 +55,11 @@ const Home = () => {
     };
     return (
         <>
-            <div className='mt-1'>
+            <h1 className="text-center p-2 font-extrabold text-2xl md:text-4xl lg:text-5xl leading-tight text-green-700">
+                Welcome to KrishiLink — discover and connect with fresh crops.
+            </h1>
+
+            <div className='mt-3'>
                 <Slider {...settings}>
                     {crop.map(info =>
                         <div key={info._id} className='relative left-2'>
@@ -102,7 +106,48 @@ const Home = () => {
                 <NavLink to={'/crop'}><button className={`flex btn btn-primary`}>View All <ArrowRight></ArrowRight></button></NavLink>
             </div>
 
-            <h1 className='text-4xl p-2 text-center font-black'>How the application work.</h1>
+            <h1 className='text-4xl p-2 text-center font-black'>How KrishiLink Works.</h1>
+            <section className="m-3">
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+
+                    <p className="flex items-center gap-2 border-2 px-4 py-2 rounded-2xl">
+                        Latest crop at home <ArrowRight />
+                    </p>
+
+                    <p className="flex items-center gap-2 border-2 px-4 py-2 rounded-2xl">
+                        Explore and Search Crops <ArrowRight />
+                    </p>
+
+                    <p className="flex items-center gap-2 border-2 px-4 py-2 rounded-2xl">
+                        Buyer Can Send Interest with Quantity & Message <ArrowRight />
+                    </p>
+                    <p className="flex items-center gap-2 border-2 px-4 py-2 rounded-2xl">
+                        User Can Post Their Crop <ArrowRight />
+                    </p>
+
+                    <p className="flex items-center gap-2 border-2 px-4 py-2 rounded-2xl">
+                        Crop Owner Reviews Requests <ArrowRight />
+                    </p>
+
+                    <p className="flex items-center gap-2 border-2 px-4 py-2 rounded-2xl">
+                        Owner Accepts or Rejects Interest <ArrowRight />
+                    </p>
+
+                    <p className="flex items-center gap-2 border-2 px-4 py-2 rounded-2xl">
+                        Buyer can see there Interest <ArrowRight />
+                    </p>
+
+                    <p className="flex items-center gap-2 border-2 px-4 py-2 rounded-2xl">
+                        Before sending interest or manage crop visitor need to login <ArrowRight />
+                    </p>
+                    <p className="flex items-center gap-2 border-2 px-4 py-2 rounded-2xl">
+                        User can update there profile also <ArrowRight />
+                    </p>
+
+                </div>
+            </section>
+
             <h1 className='text-4xl p-2 text-center font-black'>Agro News or Blogs</h1>
             <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 p-3'>
                 {news.map(crops =>
@@ -130,6 +175,36 @@ const Home = () => {
                     </div>
                 )}
             </div>
+
+            <section className="mt-12 px-4">
+                <h2 className="text-2xl font-bold mb-4 text-center text-green-700">Why Choose KrishiLink?</h2>
+
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+
+                    <div className="p-4 border rounded-xl shadow-sm hover:shadow-md transition">
+                        <h3 className="font-semibold mb-2">Direct Farmer to Buyer</h3>
+                        <p className="text-gray-600 text-sm">
+                            No middleman — buyers connect directly with farmers and get fresh products at fair prices.
+                        </p>
+                    </div>
+
+                    <div className="p-4 border rounded-xl shadow-sm hover:shadow-md transition">
+                        <h3 className="font-semibold mb-2">Transparent Pricing</h3>
+                        <p className="text-gray-600 text-sm">
+                            Farmers set their own prices, and buyers can view all details clearly before showing interest.
+                        </p>
+                    </div>
+
+                    <div className="p-4 border rounded-xl shadow-sm hover:shadow-md transition">
+                        <h3 className="font-semibold mb-2">Smart & Easy to Use</h3>
+                        <p className="text-gray-600 text-sm">
+                            Very simple for posting crops, searching, sending interest, and managing posts.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
 
         </>
     );
