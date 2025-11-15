@@ -12,6 +12,10 @@ const Home = () => {
     const [news, setNews] = useState([]);
 
     useEffect(() => {
+        document.title = "Home page";
+    }, []);
+
+    useEffect(() => {
         fetch('http://localhost:1212/crop')
             .then(res => res.json())
             .then(data => setCrop(data));

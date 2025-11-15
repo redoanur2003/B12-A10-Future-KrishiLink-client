@@ -9,7 +9,9 @@ const MyPost = () => {
     const [editCrop, setEditCrop] = useState({});
     const editModalRef = useRef(null);
     const [editId, setEditId] = useState("");
-
+    useEffect(() => {
+        document.title = "My post page";
+    }, []);
 
     useEffect(() => {
         fetch(`http://localhost:1212/myPost?email=${email}`)

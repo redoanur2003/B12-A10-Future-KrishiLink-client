@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useEffect } from 'react';
 import { NavLink, useLoaderData } from 'react-router';
 import { AuthContext } from '../../FIrebase/AuthContext/AuthContext';
 
@@ -8,6 +8,9 @@ const MyInterest = () => {
 
     // console.log("All crop: ", allCrops);
     // console.log("User: ", user);
+    useEffect(() => {
+        document.title = "My interest page";
+    }, []);
 
     const loggedUser = user.email;
     // console.log(loggedUser)

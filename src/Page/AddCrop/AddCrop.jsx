@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useEffect } from 'react';
 import { AuthContext } from '../../FIrebase/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
@@ -9,6 +9,10 @@ const AddCrop = () => {
     const { user } = use(AuthContext);
     console.log(user);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        document.title = "Add crop page";
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();

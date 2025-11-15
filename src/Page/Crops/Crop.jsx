@@ -11,6 +11,10 @@ const Crop = () => {
     const [loader, setLoader] = useState(false);
 
     useEffect(() => {
+        document.title = "All crop page";
+    }, []);
+
+    useEffect(() => {
         setLoader(true);
         const delay = setTimeout(() => {
             const result = allCrop.filter(crop =>

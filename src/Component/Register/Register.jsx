@@ -13,6 +13,9 @@ const Register = () => {
     const lock = useLocation()
     const navi = useNavigate()
     // console.log(lock);
+    useEffect(() => {
+        document.title = "Register page";
+    }, []);
 
     const { createUser, googleSign } = use(AuthContext);
     // console.log(data);

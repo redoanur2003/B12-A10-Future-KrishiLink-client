@@ -9,6 +9,9 @@ const SingleCrop = () => {
     const [totalQuantity, setTotalQuantity] = useState(quantity);
     // console.log(interests);
     // console.log(totalQuantity);
+    useEffect(() => {
+        document.title = "Single crop data";
+    }, []);
 
     const { user } = use(AuthContext);
     const interestModalRef = useRef(null);

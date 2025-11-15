@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router';
 
 const ErrorPage = () => {
+    useEffect(() => {
+        document.title = "$04 error page";
+    }, []);
     return (
         <div class="flex justify-center items-center h-screen">
             <div class="">
